@@ -1,0 +1,59 @@
+{% extends 'uploadfile/base.html' %}
+
+{% block content %}
+    <p><h1>GENDOC APP </h1></p>
+
+
+
+    <form action="{% url 'uploadfile:uploadFile' %}" method="POST" enctype="multipart/form-data">
+
+        <p><h2>1.  Cargue su archivo </h2></p>
+        <input type="text" name="fileTitle" placeholder="nombre archivo">
+        <input type="text" name="Item" placeholder="Número de carga">
+        <input type="file" name="uploadedFile">
+        {% csrf_token %}
+        <input type="submit" value="Upload">
+
+        <br>
+        <br>
+
+        <p><h2>2.  Genere formato de descarga </h2></p>
+
+    <table>
+        <tr>
+            <th>N° CARGA</th>
+            <th>Title</th>
+            <th>File Path</th>
+            <th>Upload Date & Time</th>
+            <th>EXCEL</th>
+            <th>WORD</th>
+            <th>TXT</th>
+        </tr>
+        {% for file in files %}
+            <tr>
+                <td>{{ file.item}}</td>
+                <td>{{ file.title }}</td>
+                <td>{{ file.uploadedFile.url }}</td>
+                <td>{{ file.dateTimeOfUpload }}</td>
+                <td><a href="{% url 'downloadFileExcel'  %}"> Descargar Excel </a></td>                
+                <td><a href="{% url 'downloadFileTxt'  %}"> Descargar Txt </a></td>
+                <td><a href="{% url 'downloadFileWord'  %}"> Descargar Word </a></td>
+           
+
+
+            </tr>
+        {% endfor %}
+    </table>
+
+        
+
+        <p><h2>3.  Gestione Tareas </h2></p>
+
+        <p><a href="{% url 'GestionTareas' %}"> Generar reporte 5 dias después </a></p>
+
+        <p><a href=""> Generar reporte 10 dias después </a></p>
+
+
+    </form>
+    
+{% endblock %}

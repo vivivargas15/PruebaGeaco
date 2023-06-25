@@ -1,0 +1,31 @@
+{% extends 'uploadfile/base.html' %}
+
+{% block content %}
+    <p><h1>GENDOC APP </h1></p>
+
+    <p><h2>Gestor de Tareas:  </h2></p>
+
+
+
+    {% for fecha in fechas %}
+        <tr>
+           
+            <p> <td><strong>Nombre Achivo:</strong>  {{ fecha.title }}</td></p>
+            <p><td><strong>Fecha de Carga:</strong>   {{ fecha.dateTimeOfUpload }}</td></p>
+            <p><td><strong>Fecha de proximo Reporte:</strong> {{ fecha.dateTimeOfUpload }}</td></p>
+
+             <p><td><strong>RUTA:</strong> {{ fecha.uploadedFile }}</td></p>
+             <br>
+             <br>
+             <br>
+
+
+        </tr>
+    {% endfor %}
+{% endblock %}
+
+
+
+    
+</body>
+</html>
